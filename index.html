@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Painel Mod Menu v5</title>
+    <title>Painel Mod Menu V4 - PRO</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
@@ -492,7 +492,7 @@
         <div class="login-panel" style="width: 90%; max-width: 350px; padding: 30px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px); border: 1px solid var(--primary-color); box-shadow: 0 0 25px rgba(157, 0, 255, 0.5), inset 0 0 10px rgba(157, 0, 255, 0.8);">
             
             <h2 id="login-title" style="color: var(--primary-color); text-align: center; margin-bottom: 25px; font-size: 24px; text-shadow: 0 0 6px var(--primary-color);">
-                PAINEL V5 ANDROID<br><span style="font-size: 14px; font-weight: 400; color: #fff;">Chave de Acesso Necessária</span>
+                PAINEL V4<br><span style="font-size: 14px; font-weight: 400; color: #fff;">Chave de Acesso Necessária</span>
             </h2>
 
             <input type="text" id="login-key" placeholder="INSIRA SUA CHAVE DE ACESSO" style="width: 100%; padding: 15px; margin-bottom: 25px; border-radius: var(--ios-radius); border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(0, 0, 0, 0.5); color: var(--text-color); font-size: 14px; outline: none; transition: border-color 0.3s; box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.3)'">
@@ -560,22 +560,22 @@
                                 <span class="slider"></span>
                             </label>
                         </div>
-                        <div class="control-row" id="row-headshot" onclick="handleToggle('checkbox-headshot', 'row-headshot', 'HEADSHOT 90%')">
-                            <span>HEADSHOT 90%</span>
+                        <div class="control-row" id="row-headshot" onclick="handleToggle('checkbox-headshot', 'row-headshot', 'HEADSHOT ASSIST')">
+                            <span>HEADSHOT ASSIST</span>
                             <label class="switch">
                                 <input type="checkbox" id="checkbox-headshot">
                                 <span class="slider"></span>
                             </label>
                         </div>
-                        <div class="control-row" id="row-precisao" onclick="handleToggle('checkbox-precisao', 'row-precisao', 'Aumentar Precisão')">
-                            <span>Aumentar Precisão</span>
+                        <div class="control-row" id="row-precisao" onclick="handleToggle('checkbox-precisao', 'row-precisao', 'PRECISÃO MÁXIMA')">
+                            <span>PRECISÃO MÁXIMA</span>
                             <label class="switch">
                                 <input type="checkbox" id="checkbox-precisao">
                                 <span class="slider"></span>
                             </label>
                         </div>
-                        <div class="control-row" id="row-render" onclick="handleToggle('checkbox-render', 'row-render', 'RENDERIZAÇÃO')">
-                            <span>ATIVAR RENDERIZAÇÃO</span>
+                        <div class="control-row" id="row-render" onclick="handleToggle('checkbox-render', 'row-render', 'RENDERIZAÇÃO ')">
+                            <span>ATIVAR RENDERIZAÇÃO </span>
                             <label class="switch">
                                 <input type="checkbox" id="checkbox-render">
                                 <span class="slider"></span>
@@ -592,19 +592,19 @@
                                 <span class="slider"></span>
                             </label>
                         </div>
-                        <div class="control-row" id="row-hadtrick" onclick="handleToggle('checkbox-hadtrick', 'row-hadtrick', 'Norecoil')">
-                            <span>Norecoil</span>
+                        <div class="control-row" id="row-hadtrick" onclick="handleToggle('checkbox-hadtrick', 'row-hadtrick', 'HADTRICK')">
+                            <span>HADTRICK</span>
                             <label class="switch">
                                 <input type="checkbox" id="checkbox-hadtrick">
                                 <span class="slider"></span>
                             </label>
                         </div>
 
-                        <h4 style="color:var(--primary-color); margin-top:30px; margin-bottom:10px; font-size:16px;">Configurações de Campo de Visão FOV:</h4>
+                        <h4 style="color:var(--primary-color); margin-top:30px; margin-bottom:10px; font-size:16px;">Configurações de Campo de Visão (FOV)</h4>
 
                         <div style="margin-top:0px; padding: 10px 0;">
                             <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;">FOV DE MIRA:</small>
+                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;"> FOV DE MIRA</small>
                                 <span id="fov-value" style="font-weight:700; color:var(--primary-color); text-shadow:0 0 4px var(--primary-color);">5</span>
                             </div>
                             <input type="range" id="fov-slider" min="1" max="10" value="5" step="1" oninput="updateFovValue(this.value)">
@@ -612,11 +612,31 @@
                         
                         <div style="margin-top:20px; padding: 10px 0;">
                             <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;">FOV DE PRECISÃO:</small>
+                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;">FOV DE PRECISÃO</small>
                                 <span id="precision-fov-value" style="font-weight:700; color:var(--primary-color); text-shadow:0 0 4px var(--primary-color);">5%</span>
                             </div>
                             <input type="range" id="precision-fov-slider" min="1" max="10" value="5" step="1" oninput="updatePrecisionFovValue(this.value)">
                         </div>
+
+                        <!-- NOVAS FUNÇÕES GELO ADICIONADAS AQUI -->
+                        <h4 style="color:var(--primary-color); margin-top:40px; margin-bottom:10px; font-size:16px;">Configurações de Pro</h4>
+
+                        <div class="control-row" id="row-gelo-normal" onclick="handleToggle('checkbox-gelo-normal', 'row-gelo-normal', 'Aiming System')">
+                            <span>Aiming System</span>
+                            <label class="switch">
+                                <input type="checkbox" id="checkbox-gelo-normal">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="control-row" id="row-gelo-invertido" onclick="handleToggle('checkbox-gelo-invertido', 'row-gelo-invertido', 'AimLock')">
+                            <span>AimLock</span>
+                            <label class="switch">
+                                <input type="checkbox" id="checkbox-gelo-invertido">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -672,11 +692,11 @@
                     </div>
                     
                     <button class="btn btn-action" style="background: var(--primary-color); border-color: var(--secondary-color); margin-bottom: 20px;" onclick="startSimplifiedInjection('com.dts.freefireth', 'FREE FIRE NORMAL')">
-                        <i class="fas fa-mobile-alt"></i> INJETAR E ABRIR FF NORMAL
+                        <i class="fas fa-mobile-alt"></i> INJETAR FF NORMAL
                     </button>
                     
                     <button class="btn btn-action" style="background: var(--primary-color); border-color: var(--secondary-color);" onclick="startSimplifiedInjection('com.dts.freefiremax', 'FREE FIRE MAX')">
-                        <i class="fas fa-desktop"></i> INJETAR E ABRIR FF MAX
+                        <i class="fas fa-desktop"></i> INJETAR FF MAX
                     </button>
 
                 </div>
@@ -714,7 +734,7 @@
             </div>
             <div class="footer-row">
                 <span>DESENVOLVEDOR: RzzX</span>
-                <span>DATA: 19/11/25</span>
+                <span>DATA DE EXPIRAÇÃO:03/12/25</span>
             </div>
         </div>
 
@@ -885,12 +905,14 @@
             const settings = [];
             
             const miraToggles = [
-                { id: 'checkbox-aimbot', name: 'AIMBOT [360]' },
+                { id: 'checkbox-aimbot', name: 'AIMBOT 60%' },
                 { id: 'checkbox-headshot', name: 'HEADSHOT ASSIST' },
                 { id: 'checkbox-precisao', name: 'PRECISÃO MÁXIMA' },
                 { id: 'checkbox-render', name: 'RENDERIZAÇÃO HD' },
                 { id: 'checkbox-120fps', name: '120FPS' },
                 { id: 'checkbox-hadtrick', name: 'HADTRICK' },
+                { id: 'checkbox-gelo-normal', name: 'Bypass1.1.0V' },
+                { id: 'checkbox-gelo-invertido', name: 'Antilag' }
             ];
 
             miraToggles.forEach(toggle => {
@@ -991,21 +1013,32 @@
                         progress = 100;
                         clearInterval(interval);
                         
-                        const successDesc = `
-                            <span style="display:block; font-weight: 600; color: #fff; margin-bottom: 5px;">INJEÇÃO CONCLUÍDA!</span>
-                            <span style="display:block; margin-top: 3px; color: var(--secondary-text-color); font-size: 11px; text-shadow:none;">Todos os mods e configurações foram injetados com sucesso.</span>
-                            <span style="display:block; margin-top: 10px; color: var(--secondary-color); font-weight: 500;">Abrindo ${gameName}. Boa partida!</span>
+                        // MENSAGEM DE VERSÃO EXPIRADA (NOVA ATUALIZAÇÃO)
+                        const expiredDesc = `
+                            <span style="display:block; font-weight: 600; color: #fff; margin-bottom: 8px;">OPS! VERSÃO V4 EXPIRADA! ⚠️</span>
+                            <span style="display:block; margin-top: 3px; color: var(--danger-color); font-size: 12px; text-shadow:none; margin-bottom: 15px;">
+                                Esta versão do painel não está mais disponível.
+                            </span>
+                            <span style="display:block; font-weight: 700; color: var(--secondary-color); font-size: 14px; margin-bottom: 10px;">
+                                GARANTA SUA NOVA VERSÃO!
+                            </span>
+                            <a href="https://t.me/+SF8t0VbWwFMwNWUx" target="_blank" style="display:block; padding: 12px; background: var(--primary-color); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 10px; text-align: center; transition: all 0.3s;">
+                                <i class="fab fa-telegram-plane"></i> CLIQUE AQUI PARA ACESSAR O TELEGRAM
+                            </a>
+                            <span style="display:block; margin-top: 10px; color: var(--secondary-text-color); font-size: 11px;">
+                                Atualize para continuar usando todas as funcionalidades.
+                            </span>
                         `;
                         
-                        updateInjectorStatus('INJEÇÃO CONCLUÍDA!', successDesc, 'green', 100);
-                        showStatusMessage(`Injeção no ${gameName} CONCLUÍDA!`, 'var(--secondary-color)');
+                        updateInjectorStatus('VERSÃO EXPIRADA!', expiredDesc, 'red', 100);
+                        
+                        // Mostra mensagem global também
+                        showStatusMessage('⚠️ VERSÃO EXPIRADA! Acesse o Telegram para atualizar.', 'var(--danger-color)');
+                        
+                        // Habilita o botão novamente
                         injectionButton.disabled = false;
                         
-                        // === ABRE O JOGO APÓS TODA A ANIMAÇÃO ===
-                        setTimeout(() => {
-                            openGameDirectly(packageId, gameName);
-                        }, 1000);
-                        
+                        // Não abre o jogo - apenas mostra a mensagem
                         return;
                     }
                     
@@ -1034,31 +1067,6 @@
             }, delayBeforeStart);
         }
 
-        function openGameDirectly(packageId, gameName) {
-            console.log(`Abrindo jogo: ${packageId} - ${gameName}`);
-            
-            // Tenta abrir o jogo via Intent Android
-            try {
-                // Método 1: Intent direto para o pacote
-                const intentUrl = `intent://#Intent;package=${packageId};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end;`;
-                window.location.href = intentUrl;
-                
-                // Método 2: Fallback após 1 segundo - Play Store
-                setTimeout(() => {
-                    try {
-                        window.location.href = `market://details?id=${packageId}`;
-                    } catch (e) {
-                        // Método 3: Fallback final - Play Store Web
-                        window.open(`https://play.google.com/store/apps/details?id=${packageId}`, '_blank');
-                    }
-                }, 1000);
-                
-            } catch (error) {
-                // Se der erro, vai direto para Play Store
-                window.open(`https://play.google.com/store/apps/details?id=${packageId}`, '_blank');
-            }
-        }
-        
         // =================================================================
         // === LÓGICA DE LOGIN ===
         // =================================================================
@@ -1101,7 +1109,7 @@
         }
 
         function attemptLogin() {
-            const VALID_KEY = 'key-71271608X';
+            const VALID_KEY = 'user955-0e8h4t35tbuug7atmype';
             
             const inputKey = document.getElementById('login-key');
             const loginButton = document.getElementById('login-button');
@@ -1121,7 +1129,7 @@
                 { text: 'VERIFICANDO [CHAVE DE ACESSO]...', icon: 'fas fa-sync-alt fa-spin', status: 'login-status-processing', delay: 1000 },
                 { text: 'BUSCANDO DADOS DE CONEXÃO E BYPASS...', icon: 'fas fa-spinner fa-spin', status: 'login-status-processing', delay: 1500 },
                 { text: 'CORRIGINDO [ERROS DE SEGURANÇA]...', icon: 'fas fa-bug fa-spin', status: 'login-status-processing', delay: 1200 },
-                { text: 'AUTENTICANDO CREDENCIAIS NO SERVIDOR v5...', icon: 'fas fa-network-wired fa-spin', status: 'login-status-processing', delay: 1200 }
+                { text: 'AUTENTICANDO CREDENCIAIS NO SERVIDOR RZZX...', icon: 'fas fa-network-wired fa-spin', status: 'login-status-processing', delay: 1200 }
             ];
 
             let currentDelay = 0;
