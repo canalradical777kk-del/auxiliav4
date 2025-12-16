@@ -1,1250 +1,1081 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Painel Mod Menu V4</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Keys - Sistema com Tempo/Créditos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === CONFIGURAÇÕES VISUAIS (IOS NEON PRO) - APENAS BRILHO DAS FONTES REDUZIDO === */
-        :root {
-            --primary-color: #9d00ff; /* Roxo Neon Principal */
-            --secondary-color: #39ff14; /* VERDE ELÉTRICO */
-            --tab-panel-bg: rgba(255, 255, 255, 0.04); 
-            --tab-panel-border-color: rgba(157, 0, 255, 0.5); 
-            --bg-color: #000000; 
-            --panel-bg-blur: rgba(255, 255, 255, 0.04); 
-            --glass-border: rgba(255, 255, 255, 0.15); 
-            --text-color: #c0c0c0; /* Texto mais suave */
-            --secondary-text-color: #808080; /* Texto secundário mais escuro */
-            --danger-color: #cc2b2b; /* VERMELHO MAIS ESCURO - era #ff3b30 */
-            --ios-radius: 14px; 
-            --sutil-glow: 0 0 2px rgba(255, 255, 255, 0.1); /* Glow reduzido nas fontes */
-            --tab-bar-width: 70px;
-            --footer-height: 58px;
-            --header-height: 65px;
-        }
-
-        /* RESET GERAL E FONTES */
-        * { 
-            box-sizing: border-box; 
-            user-select: none; 
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-        }
-        *::-webkit-scrollbar { display: none; }
-
-        body {
-            margin: 0; padding: 0; background-color: var(--bg-color); 
-            color: var(--text-color); height: 100vh; width: 100vw;
-            overflow: hidden; display: flex; justify-content: center;
-            align-items: center; position: relative; font-size: 14px;
+        /* TODO O SEU CSS AQUI (mantido igual) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* FUNDO DE ESTRELAS (MANTIDO ORIGINAL) */
-        body::before, body::after { content: ''; position: absolute; background-repeat: repeat; pointer-events: none; z-index: -1; }
-        body::before { top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 50% 50%, #9d00ffb0, transparent); background-size: 80px 80px; animation: starMove1 80s linear infinite; opacity: 0.8; }
-        body::after { top: -50%; left: -50%; width: 200%; height: 200%; background-image: radial-gradient(2px 2px at 50% 50%, #9d00ff80, transparent); background-size: 150px 150px; animation: starMove2 120s linear infinite reverse; opacity: 0.6; }
-
-        @keyframes starMove1 { from { background-position: 0 0; } to { background-position: 800px 800px; } } 
-        @keyframes starMove2 { from { background-position: 0 0; } to { background-position: -1000px -1000px; } } 
-
-        /* PAINEL GLASSMORHPISM PRO (MANTIDO ORIGINAL) */
-        .panel-container {
-            width: 95%; 
-            max-width: 450px; 
-            height: 85vh; 
-            max-height: 750px; 
-            background: var(--panel-bg-blur); 
-            backdrop-filter: blur(35px) saturate(200%); 
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2), 0 8px 60px 0 rgba(0, 0, 0, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.1); 
-            display: flex; 
-            flex-direction: column; 
-            position: relative; z-index: 1; 
-            overflow: hidden; 
-            border-radius: 20px; 
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        .main-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #334155;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            color: #f1f5f9;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(90deg, #2563eb, #4f46e5);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(90deg, #059669, #047857);
+            box-shadow: 0 7px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        
+        .btn-warning:hover {
+            background: linear-gradient(90deg, #d97706, #b45309);
+            box-shadow: 0 7px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .key-display {
+            background: #0f172a;
+            border: 2px dashed #475569;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            word-break: break-all;
+            color: #22d3ee;
+        }
+        
+        .key-display.expired {
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+        
+        .key-display.active {
+            color: #10b981;
+            border-color: #10b981;
+        }
+        
+        .keys-list {
+            grid-column: 1 / -1;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #1e293b;
+            padding: 15px;
+            text-align: left;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-top: 1px solid #334155;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .status-expired {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .status-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            background: #334155;
+            border: none;
+            border-radius: 6px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-right: 5px;
+        }
+        
+        .action-btn:hover {
+            background: #475569;
+        }
+        
+        .timer {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .stat-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .stat-active {
+            color: #10b981;
+        }
+        
+        .stat-expired {
+            color: #ef4444;
+        }
+        
+        .stat-total {
+            color: #60a5fa;
+        }
+        
+        .stat-time {
+            color: #f59e0b;
+        }
+        
+        .hidden {
             display: none;
         }
         
-        /* ABAS (PAINEL LATERAL) - MANTIDO ORIGINAL */
-        .tabs-header {
-            display: flex; flex-direction: column; 
-            position: absolute; 
-            top: 0; 
-            right: 0; 
-            width: var(--tab-bar-width); 
-            
-            background: rgba(0, 0, 0, 0.7); 
-            backdrop-filter: blur(20px) saturate(180%); 
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 0 20px 0 0; 
-            
-            padding: 25px 0 5px 0; 
-            
-            border-left: 1px solid var(--tab-panel-border-color); 
-            box-shadow: -5px 0 25px rgba(157, 0, 255, 0.8), inset 2px 0 10px rgba(157, 0, 255, 0.6); 
-            
-            z-index: 20; 
-            
-            overflow: hidden; 
-        }
-
-        .tab-btn {
-            flex: none; width: 100%; background: none; border: none; 
-            padding: 8px 0; 
-            color: var(--secondary-text-color); 
-            cursor: pointer; display: flex;
-            flex-direction: column; align-items: center; font-size: 10px; 
-            font-weight: 500; transition: all 0.2s ease-in-out; border-radius: 0; 
-            margin-bottom: 5px; 
-            border-left: 3px solid transparent; 
-        }
-
-        .tab-btn i { 
-            display: block; font-size: 20px; margin-bottom: 5px; line-height: 1;
-            color: var(--primary-color); 
-            text-shadow: 0 0 3px var(--primary-color);
-            transition: all 0.3s ease-in-out;
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: #10b981;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.5s;
         }
         
-        .tab-btn.active i { 
-            color: var(--secondary-color); 
-            text-shadow: 0 0 4px var(--secondary-color);
-            transform: scale(1.15); 
-        }
-        .tab-btn.active {
-            color: var(--secondary-color); 
-            background: rgba(57, 255, 20, 0.15); 
-            border-left-color: var(--secondary-color); 
-        }
-
-        .content-body { 
-            flex: 1; 
-            padding: 0 calc(var(--tab-bar-width) + 10px) 0 25px; 
-            overflow: hidden; 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            padding-top: var(--header-height);
-        } 
-        
-        /* CABEÇALHO DA FUNÇÃO - Fixo e abaixo das abas */
-        .function-header {
-            height: var(--header-height); 
-            display: flex; align-items: center; 
-            padding-bottom: 15px;
-            margin-bottom: 15px; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
-            padding-left: 25px; 
-            flex-shrink: 0; 
-            
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 15; 
-            background: rgba(0, 0, 0, 0.7); 
-            backdrop-filter: blur(10px);
-            border-radius: 20px 0 0 0; 
-        }
-
-        .func-header-emoji {
-            font-size: 26px; margin-right: 12px; line-height: 1;
-            color: var(--primary-color); 
-        }
-        .function-header .func-name {
-            color: var(--text-color); font-weight: 700; text-transform: uppercase;
-            margin-left: 5px; text-shadow: 0 0 2px var(--primary-color);
+        .notification.show {
+            transform: translateX(0);
         }
         
-        /* Contêiner de conteúdo das abas - Controla o overflow e rolagem */
-        .tab-content-wrapper {
-            flex: 1; 
-            overflow-y: auto; 
-            padding-top: 15px; 
-            padding-bottom: 15px; 
+        .notification.error {
+            background: #ef4444;
         }
         
-        /* Essencial: Esconde todas as abas por padrão */
-        .tab-content { 
-            display: none; 
-            flex-direction: column; 
-            height: 100%; 
-        }
-        /* Essencial: Mostra apenas a aba ativa */
-        .tab-content.active { display: flex; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* === SUB-ABAS (Estilo para MIRA) === */
-        .sub-tabs-header {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--ios-radius);
-            margin-bottom: 20px;
-            padding: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .sub-tab-btn {
-            flex: 1; padding: 10px 5px; background: none; border: none;
-            color: var(--secondary-text-color); font-size: 12px; font-weight: 600;
-            border-radius: var(--ios-radius); cursor: pointer;
-            transition: all 0.3s;
-        }
-        .sub-tab-btn.active {
-            background: var(--primary-color);
-            color: var(--text-color);
-            box-shadow: 0 0 12px var(--primary-color), inset 0 0 5px rgba(255, 255, 255, 0.7);
-        }
-
-        .sub-tab-content { 
-            display: none; 
-            padding: 5px 0;
-            animation: fadeIn 0.3s;
-        }
-        .sub-tab-content.active { display: block; }
-
-        /* === Estilos de Controles e ANTIBAN === */
-        
-        .active-neon-glass {
-            background: rgba(57, 255, 20, 0.1) !important; 
-            border: 1px solid var(--secondary-color) !important; 
-            box-shadow: 0 0 12px rgba(57, 255, 20, 0.6), inset 0 0 8px rgba(57, 255, 20, 0.7) !important; 
-            color: var(--text-color) !important; 
-            text-shadow: 0 0 6px var(--secondary-color) !important;
+        .notification.warning {
+            background: #f59e0b;
         }
         
-        .active-neon-danger {
-            background: rgba(204, 43, 43, 0.1) !important; 
-            border: 1px solid var(--danger-color) !important; 
-            box-shadow: 0 0 12px rgba(204, 43, 43, 0.6), inset 0 0 8px rgba(204, 43, 43, 0.7) !important; 
-            color: var(--text-color) !important; 
-            text-shadow: 0 0 6px var(--danger-color) !important;
-        }
-
-        .active-neon-processing {
-            background: rgba(157, 0, 255, 0.1) !important; 
-            border: 1px solid var(--primary-color) !important; 
-            box-shadow: 0 0 12px rgba(157, 0, 255, 0.6), inset 0 0 8px rgba(157, 0, 255, 0.7) !important; 
-            color: var(--text-color) !important; 
-            text-shadow: 0 0 6px var(--primary-color) !important;
-        }
-
-        .control-row {
-            background: rgba(255, 255, 255, 0.08); 
-            padding: 15px; border-radius: var(--ios-radius);
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 12px; font-size: 15px; font-weight: 500;
-            transition: all 0.2s ease-out; color: var(--text-color); 
-            text-shadow: var(--sutil-glow); cursor: pointer; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-        }
-        .control-row.active {
-            background: rgba(57, 255, 20, 0.1); 
-            border-color: var(--secondary-color); 
-            box-shadow: 0 0 12px rgba(57, 255, 20, 0.6), inset 0 0 8px rgba(57, 255, 20, 0.7); 
-            color: var(--text-color); 
-            text-shadow: 0 0 6px var(--secondary-color);
+        .expiring-soon {
+            animation: pulse 2s infinite;
         }
         
-        .antiban-status-row {
-            background: rgba(0, 0, 0, 0.4); 
-            padding: 12px 20px; 
-            border-radius: var(--ios-radius);
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            margin-bottom: 10px; 
-            font-size: 14px; 
-            font-weight: 500;
-            border: 1px solid var(--secondary-color); 
-            box-shadow: 0 0 8px rgba(57, 255, 20, 0.4), inset 0 0 5px rgba(57, 255, 20, 0.6); 
-        }
-
-        .antiban-status-tag {
-            color: var(--secondary-color); 
-            font-weight: 700; 
-            text-shadow: 0 0 2px var(--secondary-color);
-        }
-
-        /* Aba ANTIBAN (Layout Centralizado) */
-        #antiban {
-            justify-content: center; 
-            align-items: center; 
-            text-align: center;
-            height: 100%; 
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
         
-        .antiban-header { margin-bottom: 25px; width: 100%; padding-bottom: 10px; }
-        
-        .antiban-emoji-large {
-            font-size: 75px; 
-            background: rgba(57, 255, 20, 0.05); 
-            padding: 25px; border-radius: 50%; margin-bottom: 10px;
-            box-shadow: 0 0 15px var(--secondary-color), 0 0 25px rgba(57, 255, 20, 0.4);
-            color: var(--secondary-color); 
-            animation: shieldPulse 2.5s infinite ease-in-out; 
-            display: inline-flex; align-items: center; justify-content: center;
+        .recharge-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
         }
-
-        @keyframes shieldPulse {
-            0% { box-shadow: 0 0 15px var(--secondary-color); }
-            50% { box-shadow: 0 0 25px var(--secondary-color); }
-            100% { box-shadow: 0 0 15px var(--secondary-color); }
-        }
-
-        #antiban h2 { 
-            font-size: 26px; 
-            color: var(--secondary-color); 
-            font-weight: 800;
-            text-transform: uppercase;
-            animation: textGlow 2s infinite ease-in-out; 
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 2px var(--secondary-color); }
-            50% { text-shadow: 0 0 5px var(--secondary-color); }
-            100% { text-shadow: 0 0 2px var(--secondary-color); }
-        }
-        
-        /* Estilos de Botões e Switches */
-        .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-        .switch input:checked + .slider { 
-            background-color: var(--secondary-color); 
-            box-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
-        }
-        .switch input:checked + .slider:before { transform: translateX(26px); }
-
-        input[type=range] { -webkit-appearance: none; width: 100%; height: 8px; background: rgba(255, 255, 255, 0.2); border-radius: 4px; margin-top: 10px; }
-        input[type=range]::-webkit-slider-thumb { 
-            -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; 
-            background: var(--secondary-color); cursor: pointer; 
-            box-shadow: 0 0 15px var(--secondary-color), 0 0 8px rgba(255,255,255,0.7);
-            border: 2px solid var(--text-color); 
-        }
-
-        .btn { 
-            width: 100%; padding: 15px; margin-bottom: 10px; 
-            background: rgba(157, 0, 255, 0.25); 
-            border: 1px solid var(--primary-color); 
-            color: white; border-radius: var(--ios-radius); 
-            font-weight: 600; cursor: pointer; transition: 0.2s ease-out; 
-            text-transform: uppercase; font-size: 14px; 
-            box-shadow: 0 4px 15px rgba(157, 0, 255, 0.2); 
-            text-shadow: var(--sutil-glow); 
-        }
-        .btn:hover:not(:disabled) { opacity: 0.8; }
-        .btn.selected {
-            background: rgba(57, 255, 20, 0.1); 
-            border-color: var(--secondary-color); 
-            box-shadow: 0 0 12px rgba(57, 255, 20, 0.7), inset 0 0 5px rgba(57, 255, 20, 0.5); 
-            color: var(--text-color);
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-        }
-
-        .btn-action { 
-            background: var(--primary-color); 
-            border: 1px solid var(--secondary-color); 
-            box-shadow: 0 0 25px var(--primary-color);
-            text-shadow: 0 0 8px rgba(255,255,255,0.8); margin-top: 20px; 
-        }
-        
-        .status-card { 
-            background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: var(--ios-radius); 
-            padding: 20px; 
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.1), inset 0 0 5px rgba(255, 255, 255, 0.05); 
-            display: flex; align-items: flex-start;
-            min-height: 80px; 
-            margin-bottom: 25px;
-            transition: all 0.4s;
-        }
-        
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: var(--primary-color);
-            border-radius: 4px;
-            transition: width 0.6s ease-out, background-color 0.6s, box-shadow 0.6s;
-            box-shadow: 0 0 4px var(--primary-color);
-        }
-
-        /* ABA INFO */
-        #info {
-            padding: 20px 0;
-        }
-        .info-status-row {
-            background: rgba(255, 255, 255, 0.08); 
-            padding: 15px; border-radius: var(--ios-radius);
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 12px; font-size: 15px; font-weight: 500;
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-        }
-        .info-status-row i {
-            font-size: 20px;
-            margin-right: 15px;
-            color: var(--primary-color);
-            text-shadow: 0 0 4px var(--primary-color);
-        }
-        .info-value {
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-shadow: 0 0 3px var(--secondary-color);
-        }
-        .disclaimer-box {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: var(--ios-radius);
-            border: 1px solid var(--primary-color);
-            margin-top: 40px;
-            box-shadow: 0 0 12px rgba(157, 0, 255, 0.5);
-        }
-        .disclaimer-box p {
-            font-size: 13px;
-            color: var(--secondary-text-color);
-            line-height: 1.5;
-            text-align: center;
-            margin: 0;
-        }
-
-        
-        .footer-info { 
-            height: var(--footer-height); 
-            background: rgba(0,0,0,0.7); padding: 10px 30px; font-size: 12px; 
-            border-radius: 0 0 20px 20px; border-top: 1px solid var(--glass-border); 
-            display: flex; justify-content: space-between; align-items: center;
-            flex-shrink: 0; 
-        }
-        .footer-info .footer-row {
-            width: 48%; display: flex; flex-direction: column; 
-        }
-        .footer-info .footer-row span:last-child {
-            color: var(--secondary-text-color); 
-        }
-
-        /* === ESTILO: STATUS EM CAMADA INFERIOR (BRILHO REDUZIDO) === */
-        #status-message-container {
-            position: fixed; 
-            bottom: 0px; 
-            left: 0; 
-            right: 0;
-            width: 100%; 
-            transform: none; 
-            max-width: none; 
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.85); 
-            border: none;
-            padding: 18px 25px; 
-            border-radius: 0; 
-            font-size: 16px; 
-            font-weight: 800;
-            opacity: 0; visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-            text-align: center;
-            transform: translateY(100%);
-        }
-        
-        #status-message-container.show { 
-            opacity: 1; 
-            visibility: visible; 
-            transform: translateY(0);
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); 
-        }
-
-        /* Adicionado para o Ícone Giratório */
-        @keyframes fa-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(359deg); }
-        }
-
-        /* Cores para os status do login */
-        .login-status-error { color: var(--danger-color); text-shadow: 0 0 2px var(--danger-color); }
-        .login-status-processing { color: var(--primary-color); text-shadow: 0 0 2px var(--primary-color); }
-        .login-status-success { color: var(--secondary-color); text-shadow: 0 0 2px var(--secondary-color); }
-
-        /* Estilo da Área de Status de Login */
-        #login-status-area i {
-            transition: color 0.3s ease-in-out;
-        }
-
     </style>
 </head>
 <body>
-
-    <div id="login-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; flex-direction: column;">
-        <div class="login-panel" style="width: 90%; max-width: 350px; padding: 30px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px); border: 1px solid var(--primary-color); box-shadow: 0 0 25px rgba(157, 0, 255, 0.5), inset 0 0 10px rgba(157, 0, 255, 0.8);">
-            
-            <h2 id="login-title" style="color: var(--primary-color); text-align: center; margin-bottom: 25px; font-size: 24px; text-shadow: 0 0 6px var(--primary-color);">
-                PAINEL V4<br><span style="font-size: 14px; font-weight: 400; color: #fff;">Chave de Acesso Necessária</span>
-            </h2>
-
-            <input type="text" id="login-key" placeholder="INSIRA SUA CHAVE DE ACESSO" style="width: 100%; padding: 15px; margin-bottom: 25px; border-radius: var(--ios-radius); border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(0, 0, 0, 0.5); color: var(--text-color); font-size: 14px; outline: none; transition: border-color 0.3s; box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.3)'">
-
-            <button class="btn btn-action" id="login-button" onclick="attemptLogin()" style="margin-top: 0; background: var(--primary-color); border-color: var(--secondary-color); box-shadow: 0 0 25px var(--primary-color);">
-                <i class="fas fa-lock-open"></i> ENTRAR
-            </button>
-            
-            <div id="login-status-area" style="text-align: center; margin-top: 25px; font-size: 14px; color: var(--primary-color); opacity: 0; transition: opacity 0.3s ease-in-out;">
-                <i id="login-status-icon" class="fas fa-sync-alt fa-spin" style="margin-right: 10px; font-size: 18px; color: var(--primary-color);"></i>
-                <span id="login-status-message"></span>
-            </div>
-            
-        </div>
-    </div>
-    <input type="file" id="file-upload" style="display: none;" webkitdirectory directory>
-
-    <div class="panel-container" id="main-panel">
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-key"></i> PAINEL ADMIN - Controle de Keys</h1>
+            <p class="subtitle">Sistema de geração e gerenciamento de chaves para o Painel Oficial</p>
+            <p style="color: #60a5fa; margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Keys geradas aqui funcionam no Painel Oficial
+            </p>
+        </header>
         
-        <div class="function-header">
-            <span id="current-func-icon" class="func-header-emoji"><i class="fas fa-crosshairs"></i></span>
-            <span>MÓDULO:</span> <span class="func-name" id="current-func-name">MIRA</span>
-        </div>
-
-        <div class="tabs-header">
-            <button class="tab-btn active" onclick="openTab('mira', this, 'MIRA', 'fa-crosshairs')">
-                <i class="fas fa-crosshairs"></i>
-                <span>MIRA</span>
-            </button>
-            <button class="tab-btn" onclick="openTab('pasta', this, 'PASTA', 'fa-folder-open')">
-                <i class="fas fa-folder-open"></i>
-                <span>PASTA</span>
-            </button>
-            <button class="tab-btn" onclick="openTab('antiban', this, 'PROTEÇÃO ANT', 'fa-shield-alt')">
-                <i class="fas fa-shield-alt"></i>
-                <span>ANTIBAN</span>
-            </button>
-            <button class="tab-btn" onclick="openTab('injector', this, 'INJECTOR', 'fa-syringe')">
-                <i class="fas fa-syringe"></i>
-                <span>INJECTOR</span>
-            </button>
-            <button class="tab-btn" onclick="openTab('info', this, 'INFO', 'fa-info-circle')">
-                <i class="fas fa-info-circle"></i>
-                <span>INFO</span>
-            </button>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-title">Keys Ativas</div>
+                <div class="stat-value stat-active" id="active-count">0</div>
+                <div class="stat-desc">Funcionando no Painel</div>
             </div>
-
-        <div class="content-body">
-            
-            <div class="tab-content-wrapper">
-                
-                <div id="mira" class="tab-content active">
-                    <p style="font-size:12px; color:var(--secondary-text-color); margin-top:-10px; margin-bottom:15px; font-weight: 300;">Sistema de mira e estabilização avançada.</p>
-
-                    <div class="sub-tabs-header">
-                        <button class="sub-tab-btn active" onclick="openSubTab('mira-basico', this)">BÁSICO</button>
-                        <button class="sub-tab-btn" onclick="openSubTab('mira-avancado-settings', this)">AVANÇADO</button>
-                    </div>
-
-                    <div id="mira-basico" class="sub-tab-content active">
-                        <div class="control-row" id="row-aimbot" onclick="handleToggle('checkbox-aimbot', 'row-aimbot', 'AIMBOT 60%')">
-                            <span>AIMBOT 60%</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-aimbot"> 
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="control-row" id="row-headshot" onclick="handleToggle('checkbox-headshot', 'row-headshot', 'HEADSHOT ASSIST')">
-                            <span>HEADSHOT ASSIST</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-headshot">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="control-row" id="row-precisao" onclick="handleToggle('checkbox-precisao', 'row-precisao', 'PRECISÃO MÁXIMA')">
-                            <span>PRECISÃO MÁXIMA</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-precisao">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="control-row" id="row-render" onclick="handleToggle('checkbox-render', 'row-render', 'RENDERIZAÇÃO ')">
-                            <span>ATIVAR RENDERIZAÇÃO </span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-render">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div id="mira-avancado-settings" class="sub-tab-content">
-                        
-                        <div class="control-row" id="row-120fps" onclick="handleToggle('checkbox-120fps', 'row-120fps', '120FPS')">
-                            <span>120FPS</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-120fps">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="control-row" id="row-hadtrick" onclick="handleToggle('checkbox-hadtrick', 'row-hadtrick', 'HADTRICK')">
-                            <span>HADTRICK</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-hadtrick">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
-                        <h4 style="color:var(--primary-color); margin-top:30px; margin-bottom:10px; font-size:16px;">Configurações de Campo de Visão (FOV)</h4>
-
-                        <div style="margin-top:0px; padding: 10px 0;">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;"> FOV DE MIRA</small>
-                                <span id="fov-value" style="font-weight:700; color:var(--primary-color); text-shadow:0 0 4px var(--primary-color);">5</span>
-                            </div>
-                            <input type="range" id="fov-slider" min="1" max="10" value="5" step="1" oninput="updateFovValue(this.value)">
-                        </div>
-                        
-                        <div style="margin-top:20px; padding: 10px 0;">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <small style="color:var(--secondary-text-color); font-weight: 500; text-shadow: none;">FOV DE PRECISÃO</small>
-                                <span id="precision-fov-value" style="font-weight:700; color:var(--primary-color); text-shadow:0 0 4px var(--primary-color);">5%</span>
-                            </div>
-                            <input type="range" id="precision-fov-slider" min="1" max="10" value="5" step="1" oninput="updatePrecisionFovValue(this.value)">
-                        </div>
-
-                        <!-- NOVAS FUNÇÕES GELO ADICIONADAS AQUI -->
-                        <h4 style="color:var(--primary-color); margin-top:40px; margin-bottom:10px; font-size:16px;">Configurações de Pro</h4>
-
-                        <div class="control-row" id="row-gelo-normal" onclick="handleToggle('checkbox-gelo-normal', 'row-gelo-normal', 'Aiming System')">
-                            <span>Aiming System</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-gelo-normal">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="control-row" id="row-gelo-invertido" onclick="handleToggle('checkbox-gelo-invertido', 'row-gelo-invertido', 'AimLock')">
-                            <span>AimLock</span>
-                            <label class="switch">
-                                <input type="checkbox" id="checkbox-gelo-invertido">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                    </div>
-
-                </div>
-
-                <div id="pasta" class="tab-content">
-                    <h3 style="text-align:center; font-size:18px; color:var(--primary-color); text-shadow: 0 0 4px var(--primary-color); margin-top:0; margin-bottom:25px; font-weight: 600;">SELEÇÃO DE VERSÃO</h3>
-
-                    <button id="btn-com.dts.freefireth" class="btn" onclick="selectGame('com.dts.freefireth', 'FREE FIRE NORMAL', true)">
-                        <i class="fas fa-mobile-alt"></i> FREE FIRE NORMAL
-                    </button>
-                    <button id="btn-com.dts.freefiremax" class="btn" onclick="selectGame('com.dts.freefiremax', 'FREE FIRE MAX', true)">
-                        <i class="fas fa-desktop"></i> FREE FIRE MAX
-                    </button>
-
-                    <hr style="border:0; border-top:1px solid rgba(255, 255, 255, 0.15); width:100%; margin:25px 0;">
-
-                    <button class="btn btn-action" onclick="triggerFile()">
-                        <i class="fas fa-upload"></i> INJETAR ARQUIVOS DA PASTA
-                    </button>
-                </div>
-
-                <div id="antiban" class="tab-content">
-                    <div class="antiban-header" style="margin-top: auto;"> 
-                        <span class="antiban-emoji-large"><i class="fas fa-shield-virus"></i></span> 
-                        <h2>PROTEÇÃO ATIVA</h2>
-                        <p class="antiban-info" style="color:var(--secondary-text-color); font-size:13px; margin-bottom: 20px;">Sistema de proteção em tempo real está totalmente operacional.</p> 
-                    </div>
-
-                    <div class="antiban-status-row" style="width: 100%;">
-                        <span>BYPASS DE SEGURANÇA:</span>
-                        <span class="antiban-status-tag">ATIVADO</span>
-                    </div>
-
-                    <div class="antiban-status-row" style="width: 100%; margin-bottom: auto;"> 
-                        <span>BLOQUEIO DE REPORT:</span>
-                        <span class="antiban-status-tag">ATIVADO</span>
-                    </div>
-                </div>
-
-                <div id="injector" class="tab-content" style="justify-content: center; align-items: center;">
-                    
-                    <h3 style="text-align:center; font-size:22px; color:var(--secondary-color); text-shadow: 0 0 4px var(--secondary-color); margin-top:0; margin-bottom:25px; font-weight: 800; text-transform: uppercase;">INJEÇÃO RÁPIDA</h3>
-
-                    <div class="status-card active-neon-danger" id="status-panel" style="width: 100%; margin-bottom: 40px; transition: none;">
-                        <div class="status-indicator" id="injector-status-indicator" style="width: 18px; height: 18px; background-color: var(--danger-color); border-radius: 50%; box-shadow: 0 0 6px var(--danger-color); margin-right: 20px; flex-shrink: 0; transition: all 0.4s;"></div>
-                        <div class="status-text-content" style="flex-grow: 1;">
-                            <h3 id="status-text" style="color: #fff; font-weight: 700; font-size: 18px; margin: 0 0 5px 0; text-shadow: var(--sutil-glow); transition: all 0.4s;">AGUARDANDO INJEÇÃO...</h3> 
-                            <p id="status-desc" style="font-size: 12px; color: var(--secondary-text-color); margin: 0;">Clique em uma opção abaixo para injetar e abrir o jogo.</p>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar" id="injection-progress-bar" style="height: 100%; width: 0%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-action" style="background: var(--primary-color); border-color: var(--secondary-color); margin-bottom: 20px;" onclick="startSimplifiedInjection('com.dts.freefireth', 'FREE FIRE NORMAL')">
-                        <i class="fas fa-mobile-alt"></i> INJETAR FF NORMAL
-                    </button>
-                    
-                    <button class="btn btn-action" style="background: var(--primary-color); border-color: var(--secondary-color);" onclick="startSimplifiedInjection('com.dts.freefiremax', 'FREE FIRE MAX')">
-                        <i class="fas fa-desktop"></i> INJETAR FF MAX
-                    </button>
-
-                </div>
-                
-                <div id="info" class="tab-content" style="padding-top: 0;">
-                    
-                    <h3 style="text-align:center; font-size:20px; color:var(--primary-color); text-shadow: 0 0 4px var(--primary-color); margin-top:5px; margin-bottom:25px; font-weight: 600;">STATUS DO DISPOSITIVO</h3>
-
-                    <div class="info-status-row">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>MARCA DO DISPOSITIVO:</span>
-                        <span class="info-value">ANDROID</span>
-                    </div>
-
-                    <div class="info-status-row">
-                        <i class="fas fa-battery-full" id="battery-icon"></i>
-                        <span>BATERIA ATUAL:</span>
-                        <span class="info-value" id="battery-level">--%</span>
-                    </div>
-
-                    <div class="disclaimer-box">
-                        <h4 style="color:var(--secondary-color); text-align:center; font-size:15px; margin-bottom:10px; text-shadow: 0 0 2px var(--secondary-color);">AVISO IMPORTANTE:</h4>
-                        <p>O painel **não é xit nem hack** — é um auxílio inteligente de mira, criado para aprimorar sua precisão e deixar seus disparos muito mais consistentes. Jogue de forma justa e estratégica.</p>
-                    </div>
-
-                </div>
-                </div>
-
+            <div class="stat-card">
+                <div class="stat-title">Keys Expiradas</div>
+                <div class="stat-value stat-expired" id="expired-count">0</div>
+                <div class="stat-desc">Tempo/uso esgotado</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Total de Keys</div>
+                <div class="stat-value stat-total" id="total-count">0</div>
+                <div class="stat-desc">Geradas no sistema</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Tempo Restante</div>
+                <div class="stat-value stat-time" id="total-time">0h</div>
+                <div class="stat-desc">Tempo total ativo</div>
+            </div>
         </div>
         
-        <div class="footer-info">
-            <div class="footer-row">
-                <span>STATUS DO SERVIDOR: <span class="online-tag" style="color: var(--secondary-color); font-weight: 700;">ONLINE</span></span>
-                <span>VERSÃO: 1.0.0.2.4</span>
+        <div class="main-panel">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-plus-circle"></i> Gerar Nova Key</h2>
+                <div class="form-group">
+                    <label for="key-type">Tipo de Key:</label>
+                    <select id="key-type">
+                        <option value="time">Por Tempo (Horas/Dias)</option>
+                        <option value="credits">Por Créditos (Usos)</option>
+                    </select>
+                </div>
+                
+                <div id="time-options">
+                    <div class="form-group">
+                        <label for="time-amount">Tempo de Validade:</label>
+                        <input type="number" id="time-amount" min="1" max="720" value="24">
+                        <select id="time-unit" style="margin-top: 10px; width: 100%;">
+                            <option value="hours">Horas</option>
+                            <option value="days">Dias</option>
+                            <option value="weeks">Semanas</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="credit-options" class="hidden">
+                    <div class="form-group">
+                        <label for="credit-amount">Quantidade de Créditos:</label>
+                        <input type="number" id="credit-amount" min="1" max="1000" value="100">
+                        <p style="margin-top: 5px; font-size: 0.9rem; color: #94a3b8;">Cada uso do Painel consumirá 1 crédito</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="key-prefix">Prefixo da Key (opcional):</label>
+                    <input type="text" id="key-prefix" placeholder="Ex: PRO, VIP, TEST">
+                </div>
+                
+                <button class="btn" id="generate-btn">
+                    <i class="fas fa-key"></i> Gerar Key
+                </button>
+                
+                <div id="key-result" class="hidden">
+                    <div class="key-display active" id="generated-key">KEY-AQUI</div>
+                    <p style="text-align: center; color: #94a3b8; margin-bottom: 15px;">Copie esta key e compartilhe com o usuário</p>
+                    <button class="btn btn-success" id="copy-btn">
+                        <i class="fas fa-copy"></i> Copiar Key
+                    </button>
+                </div>
             </div>
-            <div class="footer-row">
-                <span>DESENVOLVEDOR: RzzX</span>
-                <span>DATA DE EXPIRAÇÃO: 05/12/25</span>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-bolt"></i> Ativar/Verificar Key</h2>
+                <div class="form-group">
+                    <label for="input-key">Insira a Key:</label>
+                    <input type="text" id="input-key" placeholder="Cole a key aqui para ativar/verificar">
+                </div>
+                
+                <button class="btn btn-success" id="activate-btn">
+                    <i class="fas fa-check-circle"></i> Verificar Key
+                </button>
+                
+                <div id="key-status" class="hidden">
+                    <div class="key-display" id="status-key-display">KEY-AQUI</div>
+                    
+                    <div style="margin: 20px 0;">
+                        <h3 style="color: #60a5fa; margin-bottom: 10px;">Status da Key</h3>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Status:</span>
+                            <span id="status-text">Ativa</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Tipo:</span>
+                            <span id="type-text">Tempo</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Expira em:</span>
+                            <span id="expiry-text" class="timer">24h 30m</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Créditos restantes:</span>
+                            <span id="credits-text">100</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Gerada em:</span>
+                            <span id="created-text">01/01/2023</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-warning" id="use-credit-btn">
+                        <i class="fas fa-bolt"></i> Simular Uso (1 Crédito)
+                    </button>
+                    
+                    <div class="recharge-section" id="recharge-section">
+                        <h3 style="color: #60a5fa; margin-bottom: 10px;">Recarregar Key</h3>
+                        <div class="form-group">
+                            <label for="recharge-amount">Adicionar tempo/créditos:</label>
+                            <input type="number" id="recharge-amount" min="1" max="1000" value="24">
+                            <select id="recharge-type" style="margin-top: 10px; width: 100%;">
+                                <option value="hours">Horas</option>
+                                <option value="credits">Créditos</option>
+                            </select>
+                        </div>
+                        <button class="btn" id="recharge-btn">
+                            <i class="fas fa-sync-alt"></i> Recarregar Key
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card keys-list">
+                <h2 class="card-title"><i class="fas fa-list"></i> Todas as Keys Geradas</h2>
+                <div class="table-container">
+                    <table id="keys-table">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Tempo/Créditos</th>
+                                <th>Expira em</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="keys-table-body">
+                            <!-- Keys serão adicionadas aqui pelo JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <p style="text-align: center; margin-top: 15px; color: #94a3b8;">
+                    <i class="fas fa-info-circle"></i> Estas keys funcionam no Painel Oficial dos usuários
+                </p>
             </div>
         </div>
-
     </div>
     
-    <div id="status-message-container"></div>
-
+    <div class="notification" id="notification">
+        <span id="notification-text">Operação realizada com sucesso!</span>
+    </div>
 
     <script>
+        // ============================================
+        // BANCO DE DADOS DAS KEYS - COMPARTILHADO
+        // ============================================
+        // NOME DA CHAVE NO localStorage: 'panel_keys_database'
+        // Este mesmo nome deve ser usado no Painel Oficial
         
-        let statusTimeout;
-        let selectedGamePackage = null; 
-        let selectedGameName = '';
-
-        function showStatusMessage(message, color) {
-            const messageContainer = document.getElementById('status-message-container');
-            clearTimeout(statusTimeout);
-            
-            messageContainer.innerText = message;
-            messageContainer.style.color = color;
-            
-            // Ajuste específico para o vermelho - menos brilho
-            if (color === 'var(--danger-color)') {
-                messageContainer.style.textShadow = `0 0 3px var(--danger-color)`;
-            } else {
-                messageContainer.style.textShadow = `0 0 4px ${color}`;
-            }
-            
-            messageContainer.classList.add('show');
-
-            statusTimeout = setTimeout(() => {
-                messageContainer.classList.remove('show');
-            }, 2500);
-        }
-
-        function handleToggle(checkboxId, rowId, functionName) {
-            const checkbox = document.getElementById(checkboxId);
-            const row = document.getElementById(rowId);
-            
-            checkbox.checked = !checkbox.checked;
-            const isActive = checkbox.checked;
-
-            if (isActive) {
-                row.classList.add('active'); 
-            } else {
-                row.classList.remove('active');
-            }
-            
-            const statusText = isActive ? "ATIVADA" : "DESATIVADA";
-            const statusColor = isActive ? "var(--secondary-color)" : "var(--danger-color)";
-
-            showStatusMessage(`${functionName} - ${statusText}`, statusColor);
-        }
+        let keysDatabase = JSON.parse(localStorage.getItem('panel_keys_database')) || [];
+        let currentCheckingKey = null;
         
-        function openTab(tabId, element, funcName, funcIconName) {
-            const contentElements = document.querySelectorAll('.tab-content');
-            const buttonElements = document.querySelectorAll('.tab-btn');
-            const targetContent = document.getElementById(tabId);
-            const currentFuncIconSpan = document.getElementById('current-func-icon');
-            const currentFuncName = document.getElementById('current-func-name');
-
-            contentElements.forEach(c => c.classList.remove('active'));
-            buttonElements.forEach(b => b.classList.remove('active'));
-
-            targetContent.classList.add('active');
-            element.classList.add('active');
-
-            currentFuncIconSpan.innerHTML = `<i class="fas ${funcIconName}"></i>`;
-            currentFuncName.textContent = funcName;
-            
-            if (tabId === 'info') {
-                updateBatteryStatus();
-            }
-        }
-
-        function openSubTab(subTabId, element) {
-            const subContentElements = element.closest('.tab-content').querySelectorAll('.sub-tab-content');
-            const subButtonElements = element.closest('.sub-tabs-header').querySelectorAll('.sub-tab-btn');
-            
-            subContentElements.forEach(c => c.classList.remove('active'));
-            subButtonElements.forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(subTabId).classList.add('active');
-            element.classList.add('active');
-        }
+        // Elementos DOM
+        const keyTypeSelect = document.getElementById('key-type');
+        const timeOptions = document.getElementById('time-options');
+        const creditOptions = document.getElementById('credit-options');
+        const generateBtn = document.getElementById('generate-btn');
+        const keyResult = document.getElementById('key-result');
+        const generatedKey = document.getElementById('generated-key');
+        const copyBtn = document.getElementById('copy-btn');
+        const activateBtn = document.getElementById('activate-btn');
+        const keyStatus = document.getElementById('key-status');
+        const keysTableBody = document.getElementById('keys-table-body');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notification-text');
         
-        function updateFovValue(value) {
-            document.getElementById('fov-value').textContent = value;
-            showStatusMessage(`FOV DE MIRA ajustado para ${value}`, "var(--primary-color)");
-        }
+        // Elementos de estatísticas
+        const activeCount = document.getElementById('active-count');
+        const expiredCount = document.getElementById('expired-count');
+        const totalCount = document.getElementById('total-count');
+        const totalTime = document.getElementById('total-time');
         
-        function updatePrecisionFovValue(value) {
-            document.getElementById('precision-fov-value').textContent = `${value}%`;
-            showStatusMessage(`FOV DE PRECISÃO ajustado para ${value}%`, "var(--primary-color)");
-        }
-        
-        function selectGame(packageId, gameName, isButton) {
-            selectedGamePackage = packageId;
-            selectedGameName = gameName;
-
-            document.querySelectorAll('#pasta .btn').forEach(btn => {
-                if (btn.id.startsWith('btn-com.dts.')) {
-                    btn.classList.remove('selected');
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            updateKeysTable();
+            updateStats();
+            startTimer();
+            
+            // Alternar entre tempo e créditos
+            keyTypeSelect.addEventListener('change', function() {
+                if (this.value === 'time') {
+                    timeOptions.classList.remove('hidden');
+                    creditOptions.classList.add('hidden');
+                } else {
+                    timeOptions.classList.add('hidden');
+                    creditOptions.classList.remove('hidden');
                 }
             });
-            if (isButton) {
-                document.getElementById(`btn-${packageId}`).classList.add('selected');
+            
+            // Gerar nova key
+            generateBtn.addEventListener('click', generateKey);
+            
+            // Copiar key
+            copyBtn.addEventListener('click', copyKey);
+            
+            // Verificar/Ativar key
+            activateBtn.addEventListener('click', checkKey);
+            
+            // Usar crédito (simulação)
+            document.getElementById('use-credit-btn').addEventListener('click', simulateUseCredit);
+            
+            // Recarregar key
+            document.getElementById('recharge-btn').addEventListener('click', rechargeKey);
+        });
+        
+        // Função para gerar uma nova key
+        function generateKey() {
+            const keyType = keyTypeSelect.value;
+            const prefix = document.getElementById('key-prefix').value.trim();
+            let keyData;
+            
+            // Gerar key única
+            const key = generateUniqueKey(prefix);
+            
+            if (keyType === 'time') {
+                const timeAmount = parseInt(document.getElementById('time-amount').value);
+                const timeUnit = document.getElementById('time-unit').value;
+                
+                // Converter para horas
+                let hours = timeAmount;
+                if (timeUnit === 'days') hours = timeAmount * 24;
+                if (timeUnit === 'weeks') hours = timeAmount * 24 * 7;
+                
+                keyData = {
+                    key: key,
+                    type: 'time',
+                    status: 'active',
+                    hoursRemaining: hours,
+                    totalHours: hours,
+                    createdAt: new Date().toISOString(),
+                    expiresAt: new Date(Date.now() + (hours * 60 * 60 * 1000)).toISOString(),
+                    // Adicionado: lastUsed para controle
+                    lastUsed: null
+                };
+            } else {
+                const creditAmount = parseInt(document.getElementById('credit-amount').value);
+                
+                keyData = {
+                    key: key,
+                    type: 'credits',
+                    status: 'active',
+                    creditsRemaining: creditAmount,
+                    totalCredits: creditAmount,
+                    createdAt: new Date().toISOString(),
+                    // Adicionado: lastUsed para controle
+                    lastUsed: null
+                };
             }
-
-            const color = "var(--primary-color)";
-            showStatusMessage(`PACOTE SELECIONADO: ${gameName}`, color);
+            
+            // Adicionar ao banco de dados
+            keysDatabase.push(keyData);
+            saveToLocalStorage();
+            
+            // Mostrar a key gerada
+            generatedKey.textContent = key;
+            keyResult.classList.remove('hidden');
+            
+            // Atualizar tabela e estatísticas
+            updateKeysTable();
+            updateStats();
+            
+            // Mostrar notificação
+            showNotification('Key gerada com sucesso!', 'success');
+            
+            // Rolar para a key gerada
+            keyResult.scrollIntoView({ behavior: 'smooth' });
         }
-
-        function triggerFile() {
-            if (!selectedGamePackage) {
-                showStatusMessage('ERRO: Selecione primeiro um jogo (FF Normal ou FF Max)!', "var(--danger-color)");
+        
+        // Função para gerar uma key única
+        function generateUniqueKey(prefix = '') {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let key = '';
+            
+            // Adicionar prefixo se fornecido
+            if (prefix) key = prefix + '-';
+            
+            // Gerar parte aleatória
+            for (let i = 0; i < 12; i++) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+                if ((i + 1) % 4 === 0 && i < 11) key += '-';
+            }
+            
+            // Verificar se a key já existe
+            const existingKey = keysDatabase.find(k => k.key === key);
+            if (existingKey) {
+                // Se já existir, gerar outra
+                return generateUniqueKey(prefix);
+            }
+            
+            return key;
+        }
+        
+        // Função para verificar/ativar uma key
+        function checkKey() {
+            const inputKey = document.getElementById('input-key').value.trim();
+            
+            if (!inputKey) {
+                showNotification('Por favor, insira uma key para verificar', 'error');
                 return;
             }
-
-            const triggerButton = document.querySelector('#pasta .btn-action');
-            triggerButton.disabled = true;
-
-            showStatusMessage(`BUSCANDO PASTA PARA ${selectedGameName}...`, "var(--primary-color)");
-
-            document.getElementById('file-upload').click();
             
-            setTimeout(() => {
-                const successMessage = `PASTA SELECIONADA COM SUCESSO! Injeção liberada.`;
-                showStatusMessage(successMessage, "var(--secondary-color)");
-                triggerButton.disabled = false;
-            }, 1500);
-        }
-
-        
-        function updateInjectorStatus(statusText, statusDesc, color, progress) {
-            const statusPanel = document.getElementById('status-panel');
-            const statusIndicator = document.getElementById('injector-status-indicator');
-            const statusBar = document.getElementById('injection-progress-bar');
+            // Encontrar a key no banco de dados
+            const keyData = keysDatabase.find(k => k.key === inputKey);
             
-            document.getElementById('status-text').textContent = statusText;
-            document.getElementById('status-desc').innerHTML = statusDesc;
-            
-            statusPanel.classList.remove('active-neon-glass', 'active-neon-danger', 'active-neon-processing');
-
-            let indicatorColor = 'var(--primary-color)';
-            if (color === 'green') {
-                statusPanel.classList.add('active-neon-glass');
-                indicatorColor = 'var(--secondary-color)';
-            } else if (color === 'red') {
-                statusPanel.classList.add('active-neon-danger');
-                indicatorColor = 'var(--danger-color)';
-            } else if (color === 'purple') {
-                statusPanel.classList.add('active-neon-processing');
-                indicatorColor = 'var(--primary-color)';
+            if (!keyData) {
+                showNotification('Key não encontrada!', 'error');
+                keyStatus.classList.add('hidden');
+                return;
             }
             
-            statusIndicator.style.backgroundColor = indicatorColor;
-            statusIndicator.style.boxShadow = `0 0 6px ${indicatorColor}`;
-            statusBar.style.backgroundColor = indicatorColor;
-            statusBar.style.boxShadow = `0 0 3px ${indicatorColor}`;
-
-            if (progress !== undefined) {
-                statusBar.style.width = `${progress}%`;
-            }
-        }
-        
-        function collectActiveSettings() {
-            const settings = [];
+            // Verificar status da key
+            currentCheckingKey = keyData;
             
-            const miraToggles = [
-                { id: 'checkbox-aimbot', name: 'AIMBOT 60%' },
-                { id: 'checkbox-headshot', name: 'HEADSHOT ASSIST' },
-                { id: 'checkbox-precisao', name: 'PRECISÃO MÁXIMA' },
-                { id: 'checkbox-render', name: 'RENDERIZAÇÃO HD' },
-                { id: 'checkbox-120fps', name: '120FPS' },
-                { id: 'checkbox-hadtrick', name: 'HADTRICK' },
-                { id: 'checkbox-gelo-normal', name: 'Bypass1.1.0V' },
-                { id: 'checkbox-gelo-invertido', name: 'Antilag' }
-            ];
-
-            miraToggles.forEach(toggle => {
-                if (document.getElementById(toggle.id).checked) {
-                    settings.push(`✅ ${toggle.name}`);
+            // Atualizar expiração se for key de tempo
+            if (keyData.type === 'time' && keyData.status === 'active') {
+                const now = new Date();
+                const expiresAt = new Date(keyData.expiresAt);
+                
+                if (now > expiresAt) {
+                    keyData.status = 'expired';
+                    keyData.hoursRemaining = 0;
+                    saveToLocalStorage();
                 }
-            });
-            
-            if (settings.filter(s => s.startsWith('✅')).length === 0) {
-                 settings.push(`❌ Nenhuma Função de MIRA Ativada.`);
             }
-
-            const fovMira = document.getElementById('fov-value').textContent;
-            const fovPrecisao = document.getElementById('precision-fov-value').textContent;
             
-            settings.push(`🎯 FOV DE MIRA: ${fovMira}`);
-            settings.push(`⚙️ FOV DE PRECISÃO: ${fovPrecisao}`);
+            // Atualizar a exibição do status
+            updateKeyStatusDisplay(keyData);
             
-            const selectedGameButton = document.querySelector('#pasta .btn.selected');
-            let pastaStatus = '';
-            if (selectedGameButton) {
-                pastaStatus = `🟢 PACOTE: ${selectedGameName}`;
+            // Mostrar a seção de status
+            keyStatus.classList.remove('hidden');
+            
+            // Rolar para o status
+            keyStatus.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Função para atualizar a exibição do status da key
+        function updateKeyStatusDisplay(keyData) {
+            document.getElementById('status-key-display').textContent = keyData.key;
+            
+            // Definir classe de status
+            const statusDisplay = document.getElementById('status-key-display');
+            statusDisplay.className = 'key-display';
+            
+            if (keyData.status === 'active') {
+                document.getElementById('status-text').textContent = 'Ativa';
+                document.getElementById('status-text').style.color = '#10b981';
+                statusDisplay.classList.add('active');
             } else {
-                pastaStatus = `🔴 PACOTE: Nenhuma Seleção (Padrão)`;
+                document.getElementById('status-text').textContent = 'Expirada';
+                document.getElementById('status-text').style.color = '#ef4444';
+                statusDisplay.classList.add('expired');
             }
-            settings.push(pastaStatus);
             
-            return settings;
-        }
-        
-        function displayDynamicSettings(settings, baseHtml) {
-            const descElement = document.getElementById('status-desc');
-            let currentIndex = 0;
+            // Tipo
+            document.getElementById('type-text').textContent = keyData.type === 'time' ? 'Tempo' : 'Créditos';
             
-            const dynamicContainer = document.createElement('div');
-            dynamicContainer.style.maxHeight = '120px';
-            dynamicContainer.style.overflowY = 'auto';
-            
-            descElement.innerHTML = baseHtml;
-            descElement.prepend(dynamicContainer);
-            
-            const interval = setInterval(() => {
-                if (currentIndex < settings.length) {
-                    const setting = settings[currentIndex];
-                    const item = document.createElement('span');
-                    item.style.display = 'block';
-                    item.style.marginTop = '3px';
-                    item.style.color = 'var(--secondary-text-color)';
-                    item.style.fontSize = '11px';
-                    item.style.textShadow = 'none';
-                    item.style.opacity = '0';
-                    item.style.transition = 'opacity 0.4s ease-in';
+            // Expiração
+            if (keyData.type === 'time') {
+                if (keyData.status === 'active') {
+                    const now = new Date();
+                    const expiresAt = new Date(keyData.expiresAt);
+                    const diffMs = expiresAt - now;
+                    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
                     
-                    item.innerHTML = setting;
-                    dynamicContainer.appendChild(item);
+                    document.getElementById('expiry-text').textContent = `${diffHours}h ${diffMinutes}m`;
                     
-                    setTimeout(() => { item.style.opacity = '1'; }, 10);
-                    
-                    dynamicContainer.scrollTop = dynamicContainer.scrollHeight;
-                    
-                    currentIndex++;
-                } else {
-                    clearInterval(interval);
-                }
-            }, 350);
-        }
-
-        function startSimplifiedInjection(packageId, gameName) {
-            
-            const activeSettings = collectActiveSettings();
-            
-            const firstActiveFeature = activeSettings.length > 0 ? activeSettings.find(s => s.startsWith('✅') || s.startsWith('❌') || s.startsWith('🟢') || s.startsWith('🔴'))?.replace(/^(✅|❌|🟢|🔴)\s*/, '') : 'Configurações de Injeção';
-
-            const baseStatusHtml = `
-                <span style="display:block; font-weight: 600; color: #fff; margin-bottom: 5px;">RESUMO DA INJEÇÃO:</span>
-                <span style="display:block; margin-top: 10px; color: var(--primary-color); font-weight: 500;">Preparando arquivos e bypass de segurança...</span>
-            `;
-            
-            let progress = 0;
-            const injectionButton = event.currentTarget; 
-            
-            injectionButton.disabled = true;
-
-            updateInjectorStatus('INICIANDO INJEÇÃO...', baseStatusHtml, 'purple', 0);
-            
-            displayDynamicSettings(activeSettings, baseStatusHtml);
-
-            let injectionStarted = false;
-            
-            const delayBeforeStart = activeSettings.length * 350 + 500;
-
-            setTimeout(() => {
-                injectionStarted = true;
-                const interval = setInterval(() => {
-                    progress += Math.floor(Math.random() * 15) + 5; 
-                    
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        
-                        // MENSAGEM DE VERSÃO EXPIRADA (NOVA ATUALIZAÇÃO)
-                        const expiredDesc = `
-                            <span style="display:block; font-weight: 600; color: #fff; margin-bottom: 8px;">Injeção interrompida — requer ajuste ⚠️</span>
-                            <span style="display:block; margin-top: 3px; color: var(--danger-color); font-size: 12px; text-shadow:none; margin-bottom: 15px;">
-                                Esta versão do painel não está mais disponível.
-                            </span>
-                            <span style="display:block; font-weight: 700; color: var(--secondary-color); font-size: 14px; margin-bottom: 10px;">
-                                GARANTA SUA NOVA VERSÃO!
-                            </span>
-                            <a href="https://t.me/+SF8t0VbWwFMwNWUx" target="_blank" style="display:block; padding: 12px; background: var(--primary-color); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 10px; text-align: center; transition: all 0.3s;">
-                                <i class="fab fa-telegram-plane"></i> CLIQUE AQUI PARA ACESSAR O TELEGRAM
-                            </a>
-                            <span style="display:block; margin-top: 10px; color: var(--secondary-text-color); font-size: 11px;">
-                                Atualize para continuar usando todas as funcionalidades.
-                            </span>
-                        `;
-                        
-                        updateInjectorStatus('VERSÃO EXPIRADA!', expiredDesc, 'red', 100);
-                        
-                        // Mostra mensagem global também
-                        showStatusMessage('⚠️ VERSÃO EXPIRADA! Acesse o Telegram para atualizar.', 'var(--danger-color)');
-                        
-                        // Habilita o botão novamente
-                        injectionButton.disabled = false;
-                        
-                        // Não abre o jogo - apenas mostra a mensagem
-                        return;
-                    }
-                    
-                    let statusMessage = '';
-                    if (progress < 30) {
-                        statusMessage = `Iniciando sistema de injeção...`;
-                    } else if (progress < 50) {
-                        statusMessage = `Ativando bypass de segurança...`;
-                    } else if (progress < 70) {
-                        statusMessage = `Injetando [${firstActiveFeature}]...`;
-                    } else if (progress < 85) {
-                        statusMessage = 'Validando arquivos e aplicando AntiBan...';
+                    // Adicionar classe de aviso se faltar menos de 1 hora
+                    if (diffHours < 1) {
+                        document.getElementById('expiry-text').classList.add('expiring-soon');
                     } else {
-                         statusMessage = 'Finalizando ajustes de FOV e mira...';
+                        document.getElementById('expiry-text').classList.remove('expiring-soon');
                     }
-                    
-                    const processingDesc = `
-                        <span style="display:block; font-weight: 600; color: #fff; margin-bottom: 5px;">PROCESSANDO INJEÇÃO - ${progress}%</span>
-                        <span style="display:block; margin-top: 3px; color: var(--secondary-text-color); font-size: 11px; text-shadow:none;">${statusMessage}</span>
-                        <span style="display:block; margin-top: 10px; color: var(--primary-color); font-weight: 500;">Não feche o painel.</span>
-                    `;
-
-                    updateInjectorStatus(`INJETANDO - ${progress}%`, processingDesc, 'purple', progress);
-                    
-                }, 600);
-            }, delayBeforeStart);
+                } else {
+                    document.getElementById('expiry-text').textContent = 'Expirada';
+                }
+                
+                // Esconder créditos
+                document.getElementById('credits-text').parentElement.style.display = 'none';
+                document.getElementById('use-credit-btn').style.display = 'none';
+            } else {
+                document.getElementById('expiry-text').textContent = 'N/A';
+                document.getElementById('credits-text').textContent = `${keyData.creditsRemaining} / ${keyData.totalCredits}`;
+                
+                // Mostrar créditos
+                document.getElementById('credits-text').parentElement.style.display = 'flex';
+                
+                // Mostrar botão de usar crédito apenas se a key estiver ativa
+                if (keyData.status === 'active') {
+                    document.getElementById('use-credit-btn').style.display = 'block';
+                } else {
+                    document.getElementById('use-credit-btn').style.display = 'none';
+                }
+            }
+            
+            // Data de criação
+            const createdDate = new Date(keyData.createdAt);
+            document.getElementById('created-text').textContent = createdDate.toLocaleDateString('pt-BR');
+            
+            // Mostrar/ocultar seção de recarga
+            document.getElementById('recharge-section').style.display = 'block';
         }
-
-        // =================================================================
-        // === LÓGICA DE LOGIN ===
-        // =================================================================
         
-        document.getElementById('main-panel').style.display = 'none';
-
-        function updateLoginStatus(message, iconClass, statusClass, show = true) {
-            const statusArea = document.getElementById('login-status-area');
-            const statusIcon = document.getElementById('login-status-icon');
-            const statusMessage = document.getElementById('login-status-message');
-
-            statusMessage.textContent = message;
-            statusIcon.className = iconClass;
+        // Função para simular uso de crédito (apenas para teste no admin)
+        function simulateUseCredit() {
+            if (!currentCheckingKey || currentCheckingKey.type !== 'credits') return;
             
-            statusArea.classList.remove('login-status-error', 'login-status-processing', 'login-status-success');
-            if (statusClass) {
-                statusArea.classList.add(statusClass);
-                
-                let colorVar = 'var(--primary-color)';
-                if (statusClass === 'login-status-error') colorVar = 'var(--danger-color)';
-                else if (statusClass === 'login-status-success') colorVar = 'var(--secondary-color)';
-                
-                statusIcon.style.color = colorVar;
-                statusIcon.style.textShadow = `0 0 2px ${colorVar}`;
-                statusArea.style.color = colorVar;
-                statusArea.style.textShadow = `0 0 1px ${colorVar}`;
-
-            } else {
-                statusIcon.style.color = 'var(--primary-color)';
-                statusArea.style.color = 'var(--primary-color)';
-                statusIcon.style.textShadow = '0 0 2px var(--primary-color)';
-                statusArea.style.textShadow = '0 0 1px var(--primary-color)';
+            if (currentCheckingKey.creditsRemaining <= 0) {
+                showNotification('Key sem créditos disponíveis!', 'error');
+                currentCheckingKey.status = 'expired';
+                saveToLocalStorage();
+                updateKeyStatusDisplay(currentCheckingKey);
+                updateKeysTable();
+                updateStats();
+                return;
             }
-
-            if (show) {
-                statusArea.style.opacity = 1;
+            
+            // Reduzir créditos
+            currentCheckingKey.creditsRemaining--;
+            currentCheckingKey.lastUsed = new Date().toISOString();
+            
+            // Se chegou a zero, expirar
+            if (currentCheckingKey.creditsRemaining <= 0) {
+                currentCheckingKey.status = 'expired';
+                showNotification('Key expirou! Créditos esgotados.', 'warning');
             } else {
-                statusArea.style.opacity = 0;
+                showNotification('Crédito utilizado! Restam ' + currentCheckingKey.creditsRemaining + ' créditos.', 'success');
             }
+            
+            // Salvar e atualizar
+            saveToLocalStorage();
+            updateKeyStatusDisplay(currentCheckingKey);
+            updateKeysTable();
+            updateStats();
         }
-
-        function attemptLogin() {
-            const VALID_KEY = 'user955-0e8h4t35tbuug7atmype';
+        
+        // Função para recarregar uma key
+        function rechargeKey() {
+            if (!currentCheckingKey) return;
             
-            const inputKey = document.getElementById('login-key');
-            const loginButton = document.getElementById('login-button');
-            const loginTitle = document.getElementById('login-title');
-            const loginScreen = document.getElementById('login-screen');
-            const mainPanel = document.getElementById('main-panel');
+            const rechargeAmount = parseInt(document.getElementById('recharge-amount').value);
+            const rechargeType = document.getElementById('recharge-type').value;
             
-            const inputKeyValue = inputKey.value.trim();
-
-            inputKey.disabled = true;
-            loginButton.disabled = true;
-
-            loginTitle.style.color = 'var(--primary-color)';
-            loginTitle.style.textShadow = '0 0 6px var(--primary-color)';
-
-            const messages = [
-                { text: 'VERIFICANDO [CHAVE DE ACESSO]...', icon: 'fas fa-sync-alt fa-spin', status: 'login-status-processing', delay: 1000 },
-                { text: 'BUSCANDO DADOS DE CONEXÃO E BYPASS...', icon: 'fas fa-spinner fa-spin', status: 'login-status-processing', delay: 1500 },
-                { text: 'CORRIGINDO [ERROS DE SEGURANÇA]...', icon: 'fas fa-bug fa-spin', status: 'login-status-processing', delay: 1200 },
-                { text: 'AUTENTICANDO CREDENCIAIS NO SERVIDOR RZZX...', icon: 'fas fa-network-wired fa-spin', status: 'login-status-processing', delay: 1200 }
-            ];
-
-            let currentDelay = 0;
-
-            messages.forEach((step, index) => {
-                setTimeout(() => {
-                    updateLoginStatus(step.text, step.icon, step.status, true);
-
-                    if (index === messages.length - 1) {
+            if (isNaN(rechargeAmount) || rechargeAmount <= 0) {
+                showNotification('Insira uma quantidade válida', 'error');
+                return;
+            }
+            
+            // Recarregar conforme o tipo
+            if (rechargeType === 'hours') {
+                // Adicionar horas
+                const hoursToAdd = rechargeAmount;
+                
+                if (currentCheckingKey.type === 'time') {
+                    // Para keys de tempo
+                    currentCheckingKey.hoursRemaining += hoursToAdd;
+                    currentCheckingKey.totalHours += hoursToAdd;
+                    
+                    // Recalcular data de expiração
+                    const now = new Date();
+                    const newExpiresAt = new Date(now.getTime() + (currentCheckingKey.hoursRemaining * 60 * 60 * 1000));
+                    currentCheckingKey.expiresAt = newExpiresAt.toISOString();
+                } else {
+                    // Para keys de créditos, converter horas em créditos (1 hora = 10 créditos)
+                    const creditsToAdd = hoursToAdd * 10;
+                    currentCheckingKey.creditsRemaining += creditsToAdd;
+                    currentCheckingKey.totalCredits += creditsToAdd;
+                }
+            } else {
+                // Adicionar créditos
+                if (currentCheckingKey.type === 'credits') {
+                    currentCheckingKey.creditsRemaining += rechargeAmount;
+                    currentCheckingKey.totalCredits += rechargeAmount;
+                } else {
+                    // Para keys de tempo, converter créditos em horas (10 créditos = 1 hora)
+                    const hoursToAdd = Math.floor(rechargeAmount / 10);
+                    currentCheckingKey.hoursRemaining += hoursToAdd;
+                    currentCheckingKey.totalHours += hoursToAdd;
+                    
+                    // Recalcular data de expiração
+                    const now = new Date();
+                    const newExpiresAt = new Date(now.getTime() + (currentCheckingKey.hoursRemaining * 60 * 60 * 1000));
+                    currentCheckingKey.expiresAt = newExpiresAt.toISOString();
+                }
+            }
+            
+            // Reativar a key se estava expirada
+            if (currentCheckingKey.status === 'expired') {
+                currentCheckingKey.status = 'active';
+            }
+            
+            // Salvar e atualizar
+            saveToLocalStorage();
+            updateKeyStatusDisplay(currentCheckingKey);
+            updateKeysTable();
+            updateStats();
+            
+            showNotification('Key recarregada com sucesso!', 'success');
+        }
+        
+        // Função para atualizar a tabela de keys
+        function updateKeysTable() {
+            keysTableBody.innerHTML = '';
+            
+            if (keysDatabase.length === 0) {
+                keysTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-key" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                            Nenhuma key gerada ainda
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Ordenar por data (mais recentes primeiro)
+            const sortedKeys = [...keysDatabase].sort((a, b) => 
+                new Date(b.createdAt) - new Date(a.createdAt)
+            );
+            
+            sortedKeys.forEach(keyData => {
+                const row = document.createElement('tr');
+                
+                // Status da key
+                let statusClass, statusText;
+                if (keyData.status === 'active') {
+                    statusClass = 'status-active';
+                    statusText = 'Ativa';
+                } else {
+                    statusClass = 'status-expired';
+                    statusText = 'Expirada';
+                }
+                
+                // Tempo/Créditos restantes
+                let remainingText;
+                if (keyData.type === 'time') {
+                    if (keyData.status === 'active') {
+                        const now = new Date();
+                        const expiresAt = new Date(keyData.expiresAt);
+                        const diffMs = expiresAt - now;
                         
-                        setTimeout(() => {
-                            if (inputKeyValue === VALID_KEY) {
-                                updateLoginStatus('ACESSO AUTORIZADO! INICIANDO PAINEL...', 'fas fa-check-circle', 'login-status-success', true);
-                                loginTitle.style.color = 'var(--secondary-color)';
-                                loginTitle.style.textShadow = '0 0 6px var(--secondary-color)';
-                                
-                                setTimeout(() => {
-                                    loginScreen.style.transition = 'opacity 0.5s, transform 0.5s';
-                                    loginScreen.style.opacity = '0';
-                                    loginScreen.style.transform = 'translateY(-100%)';
-                                    
-                                    setTimeout(() => {
-                                        loginScreen.style.display = 'none';
-                                        mainPanel.style.display = 'flex';
-                                        
-                                        inputKey.disabled = false;
-                                        loginButton.disabled = false;
-                                        loginTitle.style.color = 'var(--primary-color)';
-                                        loginTitle.style.textShadow = '0 0 6px var(--primary-color)';
-                                        updateLoginStatus('', '', '', false);
-                                        
-                                        openTab('mira', document.querySelector('.tabs-header .tab-btn'), 'MIRA', 'fa-crosshairs');
-                                    }, 500);
-                                }, 800);
-                                
-                            } else {
-                                updateLoginStatus('CHAVE DE ACESSO INVÁLIDA!', 'fas fa-times-circle', 'login-status-error', true);
-                                loginTitle.style.color = 'var(--danger-color)';
-                                loginTitle.style.textShadow = '0 0 6px var(--danger-color)';
-
-                                setTimeout(() => {
-                                    inputKey.value = '';
-                                    inputKey.disabled = false;
-                                    loginButton.disabled = false;
-                                    loginTitle.style.color = 'var(--primary-color)';
-                                    loginTitle.style.textShadow = '0 0 6px var(--primary-color)';
-                                    updateLoginStatus('', '', '', false);
-                                }, 2000);
-                            }
-                        }, step.delay);
+                        if (diffMs > 0) {
+                            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                            const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                            remainingText = `${diffHours}h ${diffMinutes}m`;
+                        } else {
+                            remainingText = 'Expirada';
+                        }
+                    } else {
+                        remainingText = 'Expirada';
                     }
-                }, currentDelay);
-                currentDelay += step.delay;
+                } else {
+                    remainingText = `${keyData.creditsRemaining} créditos`;
+                }
+                
+                // Data de expiração
+                let expiryText;
+                if (keyData.type === 'time' && keyData.expiresAt) {
+                    const expiryDate = new Date(keyData.expiresAt);
+                    expiryText = expiryDate.toLocaleDateString('pt-BR');
+                } else {
+                    expiryText = 'Por créditos';
+                }
+                
+                // Último uso
+                let lastUsedText = 'Nunca usado';
+                if (keyData.lastUsed) {
+                    const lastUsedDate = new Date(keyData.lastUsed);
+                    lastUsedText = lastUsedDate.toLocaleDateString('pt-BR');
+                }
+                
+                row.innerHTML = `
+                    <td><strong>${keyData.key}</strong></td>
+                    <td>${keyData.type === 'time' ? 'Tempo' : 'Créditos'}</td>
+                    <td><span class="status ${statusClass}">${statusText}</span></td>
+                    <td>${remainingText}</td>
+                    <td>${expiryText}</td>
+                    <td>
+                        <button class="action-btn" onclick="checkKeyFromTable('${keyData.key}')">
+                            <i class="fas fa-search"></i> Verificar
+                        </button>
+                        <button class="action-btn" onclick="deleteKey('${keyData.key}')">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </td>
+                `;
+                
+                keysTableBody.appendChild(row);
+            });
+        }
+        
+        // Função para verificar key a partir da tabela
+        window.checkKeyFromTable = function(key) {
+            document.getElementById('input-key').value = key;
+            checkKey();
+        };
+        
+        // Função para excluir key
+        window.deleteKey = function(key) {
+            if (confirm('Tem certeza que deseja excluir esta key?')) {
+                keysDatabase = keysDatabase.filter(k => k.key !== key);
+                saveToLocalStorage();
+                updateKeysTable();
+                updateStats();
+                showNotification('Key excluída com sucesso!', 'success');
+                
+                // Se estiver verificando a key excluída, esconder o painel de status
+                if (currentCheckingKey && currentCheckingKey.key === key) {
+                    keyStatus.classList.add('hidden');
+                }
+            }
+        };
+        
+        // Função para atualizar estatísticas
+        function updateStats() {
+            const activeKeys = keysDatabase.filter(k => k.status === 'active');
+            const expiredKeys = keysDatabase.filter(k => k.status === 'expired');
+            
+            // Calcular tempo total restante (em horas)
+            let totalHoursRemaining = 0;
+            activeKeys.forEach(key => {
+                if (key.type === 'time' && key.status === 'active') {
+                    const now = new Date();
+                    const expiresAt = new Date(key.expiresAt);
+                    const diffMs = expiresAt - now;
+                    
+                    if (diffMs > 0) {
+                        totalHoursRemaining += Math.floor(diffMs / (1000 * 60 * 60));
+                    }
+                } else if (key.type === 'credits') {
+                    // Converter créditos em horas (10 créditos = 1 hora)
+                    totalHoursRemaining += Math.floor(key.creditsRemaining / 10);
+                }
             });
             
-        }
-
-        function updateBatteryStatus() {
-            const batteryLevelElement = document.getElementById('battery-level');
-            const batteryIconElement = document.getElementById('battery-icon');
-            
-            if ('getBattery' in navigator) {
-                navigator.getBattery().then(function(battery) {
-                    const level = Math.round(battery.level * 100);
-                    batteryLevelElement.textContent = `${level}%`;
-                    setBatteryIcon(level, battery.charging);
-
-                    battery.addEventListener('levelchange', () => {
-                        const newLevel = Math.round(battery.level * 100);
-                        batteryLevelElement.textContent = `${newLevel}%`;
-                        setBatteryIcon(newLevel, battery.charging);
-                    });
-                    battery.addEventListener('chargingchange', () => {
-                        setBatteryIcon(Math.round(battery.level * 100), battery.charging);
-                    });
-                });
-            } else {
-                const simulatedLevel = Math.floor(Math.random() * (95 - 60 + 1)) + 60;
-                const isCharging = Math.random() > 0.8;
-                
-                batteryLevelElement.textContent = `${simulatedLevel}%`;
-                setBatteryIcon(simulatedLevel, isCharging);
-            }
+            // Atualizar contadores
+            activeCount.textContent = activeKeys.length;
+            expiredCount.textContent = expiredKeys.length;
+            totalCount.textContent = keysDatabase.length;
+            totalTime.textContent = `${totalHoursRemaining}h`;
         }
         
-        function setBatteryIcon(level, isCharging) {
-            const batteryIconElement = document.getElementById('battery-icon');
-            let iconClass = 'fas fa-battery-full';
-            
-            if (isCharging) {
-                iconClass = 'fas fa-bolt';
-                batteryIconElement.style.color = 'var(--secondary-color)';
-                batteryIconElement.style.textShadow = '0 0 4px var(--secondary-color)';
+        // Timer para atualizar automaticamente o tempo restante
+        function startTimer() {
+            // Atualizar a cada minuto
+            setInterval(() => {
+                updateKeysTable();
+                updateStats();
                 
-            } else if (level > 75) {
-                iconClass = 'fas fa-battery-full';
-                batteryIconElement.style.color = 'var(--secondary-color)';
-                batteryIconElement.style.textShadow = '0 0 4px var(--secondary-color)';
-            } else if (level > 40) {
-                iconClass = 'fas fa-battery-half';
-                batteryIconElement.style.color = 'var(--primary-color)';
-                batteryIconElement.style.textShadow = '0 0 4px var(--primary-color)';
-            } else if (level > 10) {
-                iconClass = 'fas fa-battery-quarter';
-                batteryIconElement.style.color = 'var(--danger-color)';
-                batteryIconElement.style.textShadow = '0 0 4px var(--danger-color)';
-            } else {
-                iconClass = 'fas fa-battery-empty';
-                batteryIconElement.style.color = 'var(--danger-color)';
-                batteryIconElement.style.textShadow = '0 0 4px var(--danger-color)';
+                // Se estiver verificando uma key, atualizar seu status também
+                if (currentCheckingKey) {
+                    const keyData = keysDatabase.find(k => k.key === currentCheckingKey.key);
+                    if (keyData) {
+                        updateKeyStatusDisplay(keyData);
+                        currentCheckingKey = keyData;
+                    }
+                }
+            }, 60000); // 1 minuto
+        }
+        
+        // Função para copiar key para a área de transferência
+        function copyKey() {
+            const keyText = generatedKey.textContent;
+            navigator.clipboard.writeText(keyText)
+                .then(() => {
+                    showNotification('Key copiada para a área de transferência!', 'success');
+                })
+                .catch(err => {
+                    showNotification('Erro ao copiar key', 'error');
+                    console.error('Erro ao copiar: ', err);
+                });
+        }
+        
+        // Função para mostrar notificações
+        function showNotification(message, type = 'success') {
+            notificationText.textContent = message;
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.classList.add('error');
+            } else if (type === 'warning') {
+                notification.classList.add('warning');
             }
             
-            batteryIconElement.className = iconClass;
+            notification.classList.add('show');
+            
+            // Ocultar após 3 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
-
+        
+        // ============================================
+        // SALVAR NO localStorage - CHAVE COMPARTILHADA
+        // ============================================
+        function saveToLocalStorage() {
+            // SALVA COM O NOME QUE O PAINEL OFICIAL VAI LER
+            localStorage.setItem('panel_keys_database', JSON.stringify(keysDatabase));
+        }
     </script>
 </body>
 </html>
